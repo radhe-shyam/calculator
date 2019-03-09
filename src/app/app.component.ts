@@ -8,40 +8,61 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'calculater';
   displayPanel = '';
+  clearDisplayPanel = true;
   setDisplayPanel = (result) => {
-    this.displayPanel = result.toString();
+    this.displayPanel = (result || '').toString();
   }
-  operand1:number;
-  operand2:number;
-  operation = '';
-
-  buttonPress = (src) => {
-    if (typeof (src) == 'number' || src == '.') {
-      if (this.displayPanel && this.operation == '') {
-        this.displayPanel += src;
-      } else {
-        this.setDisplayPanel(src);
+  isOperator = (sym) => {
+    return (['+', '-', '/', '*'].indexOf(sym) > -1);
+  }
+  removeLastChar = (src) => {
+    return src.substr(0, src.length - 1);
+  }
+  isValidDecimal = (src) => {
+    let allowDecimal = true;
+    for (let i = src.length - 2; i > 0; i--) {
+      if (src[i] == '.') {
+        allowDecimal = false;
       }
-    } else if (['+', '-', '/', '*'].indexOf(src) > -1) {
-      this.operand1 = Number(this.displayPanel);
-      this.operation = src;
-    } else {
-      this.operand2 = Number(src);
-      switch (this.operation) {
-        case '+':
-          this.setDisplayPanel(this.operand1 + this.operand2);
-          break;
-        case '-':
-          this.setDisplayPanel(this.operand1 - this.operand2);
-          break;
-        case '/':
-          this.setDisplayPanel(this.operand1 / this.operand2);
-          break;
-        case '*':
-          this.setDisplayPanel(this.operand1 * this.operand2);
-          break;
-        this.operation = '';
+      if (this.isOperator(src[i])) {
+        break;
       }
     }
+    return allowDecimal;
+  }
+
+  buttonPress = (src) => {
+    let lastChar = this.displayPanel[this.displayPanel.length - 1] || '';
+    let stringToEval = this.displayPanel;
+    if (src == '=') {
+      if (this.isOperator(lastChar)) {
+        stringToEval = this.removeLastChar(this.displayPanel);
+      }
+      this.clearDisplayPanel = true;
+      return this.setDisplayPanel(eval(stringToEval));
+    }
+    if (this.clearDisplayPanel) {
+      this.setDisplayPanel('');
+      this.clearDisplayPanel = false;
+    }
+    lastChar = this.displayPanel[this.displayPanel.length - 1] || '';
+    stringToEval = this.displayPanel;
+
+    if (src == '.') {
+      if (this.isOperator(lastChar) || lastChar == '') {
+        src = "0."
+      } else if (lastChar == '.' || !this.isValidDecimal(stringToEval)) {
+        src = '';
+      }
+    } else if (this.isOperator(src)) {
+      if (this.isOperator(lastChar)) {
+        stringToEval = this.removeLastChar(stringToEval);
+      } else if (lastChar == '.') {
+        src = '0' + src;
+      } else if (lastChar == '' && (src == '*' || src == '/')) {
+        src = '';
+      }
+    }
+    this.setDisplayPanel(stringToEval += src);
   }
 }

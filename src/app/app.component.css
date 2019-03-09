@@ -1,13 +1,20 @@
 .mainBody {
     width: 300px;
-    height: 400px;
-    border: grey solid 1px;
+    border: none;
     border-radius: 3px;
+    margin: 0px auto;
+    box-shadow: grey 0px 5px 20px;
 }
 
 .displayPanel{
-    width: 100%;
+    width: 96%;
     height: 50px;
+    background-color: black;
+    color: white;
+    padding: 2%;
+    word-break: break-all;
+    overflow-x: auto;
+    border-radius: 3px 3px 0 0;
 }
 
 .row{
@@ -15,6 +22,12 @@
     width: 100%;
 }
 
-.row button {
-    width: 25%;
+.btn-type1 {
+    width: 23%;
+    margin: 1%;
+}
+
+.btn-type2{
+    width: 98%;
+    margin: 1%;
 }

@@ -1,31 +1,34 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="mainBody">
-  <textarea class="displayPanel" [disabled]="true" type="text">{{displayPanel}}</textarea>
+  <div class="displayPanel">{{displayPanel}}</div>
   <div class="row">
-    <button (click)="buttonPress(7)">7</button>
-    <button (click)="buttonPress(8)">8</button>
-    <button (click)="buttonPress(9)">9</button>
-    <button  (click)="buttonPress('+')">+</button>
+    <button class="btn-type1" (click)="buttonPress(7)">7</button>
+    <button class="btn-type1" (click)="buttonPress(8)">8</button>
+    <button class="btn-type1" (click)="buttonPress(9)">9</button>
+    <button class="btn-type1" (click)="buttonPress('+')">+</button>
   </div>
   <br>
   <div class="row">
-    <button  (click)="buttonPress(4)">4</button>
-    <button  (click)="buttonPress(5)">5</button>
-    <button  (click)="buttonPress(6)">6</button>
-    <button  (click)="buttonPress('-')">-</button>
+    <button class="btn-type1" (click)="buttonPress(4)">4</button>
+    <button class="btn-type1" (click)="buttonPress(5)">5</button>
+    <button class="btn-type1" (click)="buttonPress(6)">6</button>
+    <button class="btn-type1" (click)="buttonPress('-')">-</button>
   </div>
   <br>
   <div class="row">
-    <button  (click)="buttonPress(1)">1</button>
-    <button  (click)="buttonPress(2)">2</button>
-    <button  (click)="buttonPress(3)">3</button>
-    <button  (click)="buttonPress('*')">*</button>
+    <button class="btn-type1" (click)="buttonPress(1)">1</button>
+    <button class="btn-type1" (click)="buttonPress(2)">2</button>
+    <button class="btn-type1" (click)="buttonPress(3)">3</button>
+    <button class="btn-type1" (click)="buttonPress('*')">*</button>
   </div>
   <br>
   <div class="row">
-    <button  (click)="buttonPress(0)">0</button>
-    <button  (click)="buttonPress('.')">.</button>
-    <button  (click)="buttonPress('=')">=</button>
-    <button  (click)="buttonPress('/')">/</button>
+    <button class="btn-type1" (click)="buttonPress(0)">0</button>
+    <button class="btn-type1" (click)="buttonPress('.')">.</button>
+    <button class="btn-type1" (click)="buttonPress('=')">=</button>
+    <button class="btn-type1" (click)="buttonPress('/')">/</button>
+  </div>
+  <div class="row">
+    <button class="btn-type2" (click)="setDisplayPanel('')">Clear</button>
   </div>
 </div>
